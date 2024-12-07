@@ -1,91 +1,79 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { useRouter } from 'expo-router';
-export default function LoginScreen() {
-  const router = useRouter();
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+
+const AbsensiMasuk = () => {
+  const [nama, setNama] = useState('');
+  const [guruMapel, setGuruMapel] = useState('');
+  const [nim, setNim] = useState('');
+
+  const handleSubmit = () => {
+    if (!nama || !guruMapel || !nim) {
+      Alert.alert('Error', 'Harap isi semua data!');
+      return;
+    }
+    Alert.alert('Data Tersimpan', `Nama: ${nama}\nGuru Mapel: ${guruMapel}\nNIM: ${nim}`);
+    // Di sini Anda bisa mengirim data ke server atau menyimpannya ke storage lokal
+  };
+
   return (
     <View style={styles.container}>
-      {/* Logo and Title */}
-      <View style={styles.header}>
-        <Text style={styles.logoText}>Absensi Pegawai</Text>
-      </View>
+      <Text style={styles.title}>Absensi Masuk</Text>
 
-      {/* Attendance Buttons */}
-      <TouchableOpacity style={styles.presentButton} onPress={() => router.push('/HADIR')}>
-        <Text style={styles.buttonText}>HADIR</Text>
-      </TouchableOpacity>
+      <Text style={styles.label}>Nama:</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Masukkan Nama"
+        value={nama}
+        onChangeText={setNama}
+      />
 
-      <TouchableOpacity style={styles.absentButton}>
-        <Text style={styles.buttonText}>IZIN</Text>
-      </TouchableOpacity>
+      <Text style={styles.label}>Guru Mapel:</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Masukkan Guru Mapel"
+        value={guruMapel}
+        onChangeText={setGuruMapel}
+      />
 
-      {/* Switch Account Link */}
-      <Text style={styles.switchAccountText}>ganti akun</Text>
+      <Text style={styles.label}>NIM:</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Masukkan NIM"
+        keyboardType="numeric"
+        value={nim}
+        onChangeText={setNim}
+      />
+
+      <Button title="Submit" onPress={handleSubmit} />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 16,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#f5f5f5',
+    padding: 20,
   },
-  header: {
-    alignItems: 'center',
-    marginBottom: 40,
-  },
-  logoText: {
+  title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#4CAF50', 
+    textAlign: 'center',
     marginBottom: 20,
   },
-  userName: {
+  label: {
     fontSize: 16,
-    color: '#333333',
-    marginBottom: 4,
+    marginBottom: 5,
   },
-  userFullName: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#333333',
-    marginBottom: 30,
-  },
-  presentButton: {
-    flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: '90%',
-      paddingVertical: 15,
-      backgroundColor: '#4CAF50',
-      borderColor: '#4CAF50',
-      borderWidth: 1,
-      borderRadius: 8,
-      marginVertical: 10,
-  },
-  absentButton: {
-    flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: '90%',
-      paddingVertical: 15,
-      backgroundColor: '#FFFFFF',
-      borderColor: '#4CAF50',
-      borderWidth: 1,
-      borderRadius: 8,
-      marginVertical: 10,
-  },
-  buttonText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333333',
-  },
-  switchAccountText: {
-    fontSize: 14,
-    color: '#666666',
-    textDecorationLine: 'underline',
+  input: {
+    height: 40,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 5,
+    marginBottom: 15,
+    paddingHorizontal: 10,
+    backgroundColor: '#fff',
   },
 });
+
+export default AbsensiMasuk;
