@@ -27,7 +27,7 @@ const DashboardScreen = () => {
         <View style={styles.featuresContainer}>
           {[
             { label: 'Absensi Dokter', icon: '👨‍⚕️' },
-            { label: 'Jadwal Dokter', icon: '📅' },
+            { label: 'Jadwal Dokter', icon: '📅', route: '/schedule'},
             { label: 'Chat Dokter', icon: '💬' },
             { label: 'Pemeriksaan LAB', icon: '🧪' },
             { label: 'Informasi Rumah Sakit', icon: '🏥' },
@@ -114,13 +114,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   featuresContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
+    flexDirection: 'row', // Ensure the container allows for a row layout
+    flexWrap: 'wrap', // Allows items to wrap to the next line
+    justifyContent: 'space-between', // Adjusts the spacing around items
+    alignItems: 'center', // Centers items vertically within each row
     marginVertical: 10,
   },
   featureItem: {
-    width: '30%',
+    width: '25%', // Adjust the width to fit 4 items per row
     alignItems: 'center',
     marginVertical: 10,
   },
